@@ -1,0 +1,10 @@
+# Rust build directory
+/target/
+
+# Generated native executables and LLVM IR
+*.ll
+*.exe
+fibonacci
+
+# OS generated files
+.DS_Store

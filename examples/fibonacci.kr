@@ -1,0 +1,8 @@
+make fib(n)
+    when n < 2
+        return n
+    return fib(n - 1) + fib(n - 2)
+
+set limit = 10
+set result = fib(limit)
+show result

@@ -1,0 +1,41 @@
+name: Release Krait
+
+on:
+  push:
+    tags:
+      - 'v*' # Triggers on version tags e.g., v0.1.0
+
+jobs:
+  build:
+    name: Build for ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            artifact_name: krait
+            asset_name: krait-linux-amd64
+          - os: macos-latest
+            artifact_name: krait
+            asset_name: krait-macos-amd64
+          - os: windows-latest
+            artifact_name: krait.exe
+            asset_name: krait-windows-amd64.exe
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Build Krait Release
+        run: cargo build --release
+
+      - name: Upload Binary to Release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: target/release/${{ matrix.artifact_name }}
+          asset_name: ${{ matrix.asset_name }}
+          tag: ${{ github.ref }}
+          overwrite: true

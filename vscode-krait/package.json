@@ -1,0 +1,28 @@
+{
+  "name": "krait",
+  "displayName": "Krait",
+  "description": "Official language support for Krait (.kr)",
+  "version": "0.1.0",
+  "publisher": "krait-lang",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": ["Programming Languages"],
+  "contributes": {
+    "languages": [
+      {
+        "id": "krait",
+        "aliases": ["Krait", "krait"],
+        "extensions": [".kr"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "krait",
+        "scopeName": "source.krait",
+        "path": "./syntaxes/krait.tmLanguage.json"
+      }
+    ]
+  }
+}
