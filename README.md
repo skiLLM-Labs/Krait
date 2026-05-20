@@ -121,7 +121,3 @@ cd Krait
 cargo build --release
 cargo install --path .
 ```
-
-## License
-MIT License. See `LICENSE` for more information.
-```
