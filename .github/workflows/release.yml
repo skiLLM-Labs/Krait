@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*' # Triggers on version tags e.g., v0.1.0
 
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build for ${{ matrix.os }}
