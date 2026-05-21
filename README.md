@@ -36,8 +36,6 @@ Krait links directly to your native system toolchain with optimal compile-time p
 - **Stand-alone Interpreter**: Run `.kr` scripts instantly via `krait run` without needing a compilation toolchain.
 - **VS Code Extension**: Premium, built-in colorizer support.
 
----
-
 ## Installation
 
 3d11909 (Release: v1.0.0)
