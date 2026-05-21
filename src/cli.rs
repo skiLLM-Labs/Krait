@@ -42,6 +42,13 @@ pub fn execute_subcommand(args: &[String]) {
             }
             let _ = check_file(&args[1]);
         }
+        "fmt" => {
+            if args.len() < 2 {
+                eprintln!("Error: Please provide a source file. (e.g., krait fmt src/main.kr)");
+                return;
+            }
+            let _ = format_file(&args[1]);
+        }
         "format" => {
             if args.len() < 2 {
                 eprintln!("Error: Please provide a source file. (e.g., krait format src/main.kr)");
@@ -50,7 +57,7 @@ pub fn execute_subcommand(args: &[String]) {
             let _ = format_file(&args[1]);
         }
         "-v" | "--version" => {
-            println!("Krait v0.1.0 (Production Engine)");
+            println!("Krait v1.0.0 (Production Engine)");
         }
         _ => {
             eprintln!("Unknown command option: {}", command);
@@ -63,7 +70,7 @@ pub fn execute_subcommand(args: &[String]) {
 // Phase 3: The Interactive REPL (IDLE)
 // ---------------------------------------------------------
 fn start_repl() {
-    println!("Krait 0.1.0 Interactive Shell");
+    println!("Krait 1.0.0 Interactive Shell");
     println!("Type 'exit' to quit.\n");
     
     let mut interpreter = crate::interpreter::Interpreter::new();
@@ -116,7 +123,7 @@ fn create_project(name: &str) {
     }
     
     let toml_content = format!(
-        "[package]\nname = \"{}\"\nversion = \"0.1.0\"\ncompiler = \">=0.1.0\"\n\n[dependencies]\n# Add packages here\n", 
+        "[package]\nname = \"{}\"\nversion = \"1.0.0\"\ncompiler = \">=1.0.0\"\n\n[dependencies]\n# Add packages here\n", 
         name
     );
     fs::write(format!("{}/krait.toml", name), toml_content).unwrap();
@@ -151,6 +158,7 @@ fn compile_file(path: &str) -> Result<(), ()> {
     let tokens = Lexer::tokenize(&source).map_err(|e| eprintln!("Syntax: {}", e))?;
     let mut parser = Parser::new(tokens);
     let ast = parser.parse_program().map_err(|e| eprintln!("Parse: {}", e))?;
+    let ast = resolve_imports(ast).map_err(|e| eprintln!("Import Error: {}", e))?;
     
     let mut sema = SemanticAnalyzer::new();
     sema.analyze(&ast).map_err(|e| eprintln!("Semantic: {}", e))?;
@@ -166,7 +174,7 @@ fn compile_file(path: &str) -> Result<(), ()> {
     println!("Linking native executable '{}'...", base_name);
     
     let status = Command::new("clang")
-        .args([&ll_out, "-Wno-override-module", "-o", base_name])
+        .args([&ll_out, "-Wno-override-module", "-O3", "-flto", "-march=x86-64-v2", "-o", base_name])
         .status();
 
     match status {
@@ -191,6 +199,7 @@ fn run_file(path: &str) -> Result<(), ()> {
     let tokens = Lexer::tokenize(&source).map_err(|e| eprintln!("Syntax: {}", e))?;
     let mut parser = Parser::new(tokens);
     let ast = parser.parse_program().map_err(|e| eprintln!("Parse: {}", e))?;
+    let ast = resolve_imports(ast).map_err(|e| eprintln!("Import Error: {}", e))?;
     
     let mut sema = SemanticAnalyzer::new();
     sema.analyze(&ast).map_err(|e| eprintln!("Semantic: {}", e))?;
@@ -205,6 +214,7 @@ fn check_file(path: &str) -> Result<(), ()> {
     let tokens = Lexer::tokenize(&source).map_err(|e| eprintln!("Syntax: {}", e))?;
     let mut parser = Parser::new(tokens);
     let ast = parser.parse_program().map_err(|e| eprintln!("Parse: {}", e))?;
+    let ast = resolve_imports(ast).map_err(|e| eprintln!("Import Error: {}", e))?;
     
     let mut sema = SemanticAnalyzer::new();
     sema.analyze(&ast).map_err(|e| eprintln!("Semantic: {}", e))?;
@@ -223,4 +233,26 @@ fn format_file(path: &str) -> Result<(), ()> {
     fs::write(path, formatted).map_err(|e| eprintln!("I/O Error: {}", e))?;
     println!("Reformatted file: {}", path);
     Ok(())
+}
+
+fn resolve_imports(ast: Vec<crate::ast::Stmt>) -> Result<Vec<crate::ast::Stmt>, String> {
+    let mut resolved = Vec::new();
+    for stmt in ast {
+        if let crate::ast::Stmt::Import(name) = stmt {
+            let path = format!("lib/{}.kr", name);
+            if std::path::Path::new(&path).exists() {
+                let source = fs::read_to_string(&path).map_err(|e| format!("Failed to read {}: {}", path, e))?;
+                let tokens = Lexer::tokenize(&source).map_err(|e| format!("Syntax error in {}: {}", path, e))?;
+                let mut parser = Parser::new(tokens);
+                let mut imported_ast = parser.parse_program().map_err(|e| format!("Parse error in {}: {}", path, e))?;
+                imported_ast = resolve_imports(imported_ast)?;
+                resolved.extend(imported_ast);
+            } else {
+                return Err(format!("Module '{}' not found in lib/.", name));
+            }
+        } else {
+            resolved.push(stmt);
+        }
+    }
+    Ok(resolved)
 }

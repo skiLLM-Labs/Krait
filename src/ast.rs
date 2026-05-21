@@ -15,6 +15,11 @@ pub enum Op {
 pub enum Expr {
     Literal(Literal),
     Variable(String),
+    New(String),
+    FieldAccess {
+        object: Box<Expr>,
+        field: String,
+    },
     Binary {
         left: Box<Expr>,
         op: Op,
@@ -33,6 +38,10 @@ pub enum Stmt {
         params: Vec<String>,
         body: Vec<Stmt>,
     },
+    ExternDecl {
+        name: String,
+        params: Vec<String>,
+    },
     StructDef {
         name: String,
         fields: Vec<(String, Expr)>,
@@ -41,6 +50,12 @@ pub enum Stmt {
         name: String,
         value: Expr,
     },
+    FieldAssignment {
+        object: Expr,
+        field: String,
+        value: Expr,
+    },
+    Import(String),
     When {
         cond: Expr,
         then_branch: Vec<Stmt>,

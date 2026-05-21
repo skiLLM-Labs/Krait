@@ -1,0 +1,40 @@
+import math
+import io
+make print_char(c)
+    putchar(c)
+
+make print_newline()
+    putchar(10)
+
+make calculate(op, a, b)
+    when op == 1
+        return a + b
+    when op == 2
+        return a - b
+    when op == 3
+        return a * b
+    when op == 4
+        when b == 0
+            print_char(69)
+            print_char(114)
+            print_newline()
+            return 0
+        return a / b
+    when op == 5
+        return power(a, b)
+    when op == 6
+        return abs(a)
+    return 0
+
+set r1 = calculate(1, 120, 80)
+show r1
+set r2 = calculate(2, 450, 23)
+show r2
+set r3 = calculate(3, 12, 12)
+show r3
+set r4 = calculate(4, 1000, 8)
+show r4
+set r5 = calculate(5, 3, 6)
+show r5
+set r6 = calculate(6, 0 - 99, 0)
+show r6

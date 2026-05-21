@@ -3,6 +3,6 @@ make fib(n)
         return n
     return fib(n - 1) + fib(n - 2)
 
-set limit = 10
+set limit = 40
 set result = fib(limit)
 show result

@@ -1,0 +1,4 @@
+extern make putchar(c)
+putchar(65)
+putchar(66)
+putchar(10)

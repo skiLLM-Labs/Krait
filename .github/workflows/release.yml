@@ -3,7 +3,7 @@ name: Release Krait
 on:
   push:
     tags:
-      - 'v*' # Triggers on version tags e.g., v0.1.0
+      - 'v*' # Triggers on version tags e.g., v1.0.0
 
 permissions:
   contents: write
@@ -26,15 +26,19 @@ jobs:
             asset_name: krait-windows-amd64.exe
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-      - name: Install Rust
+      - name: Install Rust Toolchain
         uses: dtolnay/rust-toolchain@stable
 
-      - name: Build Krait Release
+      - name: Cache Cargo Dependencies
+        uses: swatinem/rust-cache@v2
+
+      - name: Build Krait Binary (Release)
         run: cargo build --release
 
-      - name: Upload Binary to Release
+      - name: Upload Release Binaries
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}

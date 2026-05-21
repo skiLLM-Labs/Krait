@@ -1,0 +1,12 @@
+# Krait Standard Math Module
+
+make abs(n)
+    when n < 0
+        return 0 - n
+    return n
+
+make power(base, exp)
+    set result = 1
+    repeat exp times
+        set result = result * base
+    return result

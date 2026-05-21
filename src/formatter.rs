@@ -34,6 +34,10 @@ impl Formatter {
                 out.push('\n');
                 out
             }
+            Stmt::ExternDecl { name, params } => {
+                let params_str = params.join(", ");
+                format!("{}extern make {}({})\n", self.indent(), name, params_str)
+            }
             Stmt::StructDef { name, fields } => {
                 let mut out = format!("{}make {}\n", self.indent(), name);
                 self.indent_level += 1;
@@ -44,8 +48,12 @@ impl Formatter {
                 out.push('\n');
                 out
             }
+            Stmt::Import(name) => format!("import {}\n", name),
             Stmt::VariableDecl { name, value } => {
                 format!("{}set {} = {}\n", self.indent(), name, self.format_expr(value))
+            }
+            Stmt::FieldAssignment { object, field, value } => {
+                format!("{}set {}.{} = {}\n", self.indent(), self.format_expr(object), field, self.format_expr(value))
             }
             Stmt::When { cond, then_branch } => {
                 let mut out = format!("{}when {}\n", self.indent(), self.format_expr(cond));
@@ -90,6 +98,10 @@ impl Formatter {
                 Literal::Bool(v) => v.to_string(),
             },
             Expr::Variable(name) => name.clone(),
+            Expr::New(name) => format!("new {}", name),
+            Expr::FieldAccess { object, field } => {
+                format!("{}.{}", self.format_expr(object), field)
+            }
             Expr::Binary { left, op, right } => {
                 let op_str = match op {
                     Op::Plus => "+",

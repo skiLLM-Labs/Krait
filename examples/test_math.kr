@@ -1,0 +1,7 @@
+import math
+
+set a = abs(0 - 42)
+show a
+
+set p = power(2, 10)
+show p

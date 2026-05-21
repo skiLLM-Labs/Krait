@@ -1,0 +1,9 @@
+make Point
+    x = 0
+    y = 0
+
+set p = new Point
+set p.x = 100
+set p.y = 200
+show p.x
+show p.y

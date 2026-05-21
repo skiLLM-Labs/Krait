@@ -1,10 +1,45 @@
 # Rust build directory
 /target/
 
-# Generated native executables and LLVM IR
+# Cargo lock files (optional, but standard to ignore in libraries, let's keep it tracked or ignored as needed)
+# Since Cargo.lock is in the root, we'll keep it tracked, but ignore standard cargo output.
+
+# Compiled native binaries (executables with no extensions)
+/calculator
+/ffi
+/fibonacci
+/main
+/ownership
+/struct
+/test_import
+/test_math
+
+# Generated native executables and LLVM IR / Assembly
 *.ll
 *.exe
-fibonacci
+*.s
+*.o
+*.obj
+*.out
+*.dylib
+*.so
+*.a
+*.lib
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*~
 
 # OS generated files
 .DS_Store
+Thumbs.db
+
+# Agent & workspace temporary metadata
+.antigravitycli/
+.gemini/

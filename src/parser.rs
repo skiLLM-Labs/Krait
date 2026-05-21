@@ -61,6 +61,26 @@ impl Parser {
 
     fn parse_statement(&mut self) -> Result<Stmt, String> {
         match self.peek() {
+            Token::Extern => {
+                self.advance();
+                self.expect(Token::Make)?;
+                let name = self.expect_ident()?;
+                self.expect(Token::LParen)?;
+                let mut params = Vec::new();
+                if !self.check(Token::RParen) {
+                    loop {
+                        params.push(self.expect_ident()?);
+                        if self.check(Token::Comma) {
+                            self.advance();
+                        } else {
+                            break;
+                        }
+                    }
+                }
+                self.expect(Token::RParen)?;
+                self.expect(Token::Newline)?;
+                Ok(Stmt::ExternDecl { name, params })
+            }
             Token::Make => {
                 self.advance();
                 let name = self.expect_ident()?;
@@ -87,11 +107,26 @@ impl Parser {
             }
             Token::Set => {
                 self.advance();
-                let name = self.expect_ident()?;
+                let lhs = self.parse_expression()?;
                 self.expect(Token::Equal)?;
                 let value = self.parse_expression()?;
                 self.expect(Token::Newline)?;
-                Ok(Stmt::VariableDecl { name, value })
+                match lhs {
+                    Expr::Variable(name) => Ok(Stmt::VariableDecl { name, value }),
+                    Expr::FieldAccess { object, field } => Ok(Stmt::FieldAssignment { object: *object, field, value }),
+                    _ => Err("Invalid left-hand side in assignment".into()),
+                }
+            }
+            Token::Import => {
+                self.advance();
+                match self.peek().clone() {
+                    Token::Ident(name) => {
+                        let n = name.clone();
+                        self.advance();
+                        Ok(Stmt::Import(n))
+                    }
+                    _ => Err("Expected module name after 'import'.".into())
+                }
             }
             Token::When => {
                 self.advance();
@@ -237,11 +272,15 @@ impl Parser {
     }
 
     fn parse_primary(&mut self) -> Result<Expr, String> {
-        match self.advance() {
-            Token::Int(val) => Ok(Expr::Literal(Literal::Int(val))),
-            Token::Float(val) => Ok(Expr::Literal(Literal::Float(val))),
-            Token::Str(val) => Ok(Expr::Literal(Literal::Str(val))),
-            Token::Bool(val) => Ok(Expr::Literal(Literal::Bool(val))),
+        let mut expr = match self.advance() {
+            Token::Int(val) => Expr::Literal(Literal::Int(val)),
+            Token::Float(val) => Expr::Literal(Literal::Float(val)),
+            Token::Str(val) => Expr::Literal(Literal::Str(val)),
+            Token::Bool(val) => Expr::Literal(Literal::Bool(val)),
+            Token::New => {
+                let name = self.expect_ident()?;
+                Expr::New(name)
+            }
             Token::Ident(name) => {
                 if self.check(Token::LParen) {
                     self.advance();
@@ -257,17 +296,28 @@ impl Parser {
                         }
                     }
                     self.expect(Token::RParen)?;
-                    Ok(Expr::Call { callee: name, args })
+                    Expr::Call { callee: name, args }
                 } else {
-                    Ok(Expr::Variable(name))
+                    Expr::Variable(name)
                 }
             }
             Token::LParen => {
                 let expr = self.parse_expression()?;
                 self.expect(Token::RParen)?;
-                Ok(expr)
+                expr
             }
-            other => Err(format!("Expected expression, found invalid token: {:?}", other)),
+            other => return Err(format!("Expected expression, found invalid token: {:?}", other)),
+        };
+
+        while self.check(Token::Dot) {
+            self.advance();
+            let field = self.expect_ident()?;
+            expr = Expr::FieldAccess {
+                object: Box::new(expr),
+                field,
+            };
         }
+
+        Ok(expr)
     }
 }

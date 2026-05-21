@@ -47,12 +47,16 @@ impl Interpreter {
 
     fn execute_stmt(&mut self, stmt: &Stmt, env: &mut HashMap<String, Value>) -> Result<Option<Value>, String> {
         match stmt {
-            Stmt::FunctionDef { .. } | Stmt::StructDef { .. } => Ok(None),
+            Stmt::FunctionDef { .. } | Stmt::StructDef { .. } | Stmt::ExternDecl { .. } => Ok(None),
+            Stmt::Import(_) => Ok(None),
             Stmt::VariableDecl { name, value } => {
                 let val = self.eval_expr(value, env)?;
                 env.insert(name.clone(), val.clone());
                 self.env.insert(name.clone(), val); // Persist to global REPL memory
                 Ok(None)
+            }
+            Stmt::FieldAssignment { .. } => {
+                Err("Field assignment not supported in interpreter".into())
             }
             Stmt::When { cond, then_branch } => {
                 let cond_val = self.eval_expr(cond, env)?;
@@ -60,7 +64,17 @@ impl Interpreter {
                     let mut local_env = env.clone();
                     for s in then_branch {
                         if let Some(ret) = self.execute_stmt(s, &mut local_env)? {
+                            for (key, val) in &local_env {
+                                if env.contains_key(key) {
+                                    env.insert(key.clone(), val.clone());
+                                }
+                            }
                             return Ok(Some(ret));
+                        }
+                    }
+                    for (key, val) in &local_env {
+                        if env.contains_key(key) {
+                            env.insert(key.clone(), val.clone());
                         }
                     }
                 }
@@ -73,7 +87,17 @@ impl Interpreter {
                         let mut local_env = env.clone();
                         for s in body {
                             if let Some(ret) = self.execute_stmt(s, &mut local_env)? {
+                                for (key, val) in &local_env {
+                                    if env.contains_key(key) {
+                                        env.insert(key.clone(), val.clone());
+                                    }
+                                }
                                 return Ok(Some(ret));
+                            }
+                        }
+                        for (key, val) in &local_env {
+                            if env.contains_key(key) {
+                                env.insert(key.clone(), val.clone());
                             }
                         }
                     }
@@ -123,6 +147,10 @@ impl Interpreter {
                 } else {
                     Err(format!("Undefined identifier: '{}'", name))
                 }
+            }
+            Expr::New(_name) => Err("Heap allocation not supported in interpreter".into()),
+            Expr::FieldAccess { object: _, field: _ } => {
+                Err("Field access not supported in interpreter yet".into())
             }
             Expr::Binary { left, op, right } => {
                 let l_val = self.eval_expr(left, env)?;

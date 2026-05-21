@@ -1,0 +1,4 @@
+import io
+
+putchar(75)
+putchar(10)

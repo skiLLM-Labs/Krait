@@ -1,0 +1,12 @@
+make Point
+    x = 0
+    y = 0
+
+set p1 = new Point
+set p1.x = 100
+
+# Move p1 to p2. Ownership of p1 is transferred!
+set p2 = p1
+
+# This should trigger an Ownership Error since p1 was moved!
+show p1.x

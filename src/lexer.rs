@@ -1,6 +1,6 @@
 #[derive(Debug, Clone, PartialEq)]
 pub enum Token {
-    Make, Set, When, Repeat, Times, Return, Show,
+    Make, Set, When, Repeat, Times, Return, Show, Extern, New, Import,
     Ident(String),
     Int(i64),
     Float(f64),
@@ -120,6 +120,9 @@ impl Lexer {
                             "times" => tokens.push(Token::Times),
                             "return" => tokens.push(Token::Return),
                             "show" => tokens.push(Token::Show),
+                            "extern" => tokens.push(Token::Extern),
+                            "new" => tokens.push(Token::New),
+                            "import" => tokens.push(Token::Import),
                             "true" => tokens.push(Token::Bool(true)),
                             "false" => tokens.push(Token::Bool(false)),
                             _ => tokens.push(Token::Ident(ident)),

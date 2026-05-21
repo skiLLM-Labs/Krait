@@ -1,0 +1,11 @@
+make Point
+    x = 0
+    y = 0
+
+set p1 = new Point
+set p1.x = 100
+
+# Move p1 to p2
+set p2 = p1
+
+show p2.x
