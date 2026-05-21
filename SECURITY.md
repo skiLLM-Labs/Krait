@@ -26,7 +26,7 @@ For a systems language like Krait, we classify the following as security vulnera
 To give us time to investigate and patch the vulnerability before it can be exploited maliciously, please follow our coordinated disclosure process:
 
 1. **Do Not Publicly Disclose:** Keep the details confidential until we have published a patch.
-2. **Submit via Email:** Send a detailed report to **[Insert Your Security Email, e.g., security@skillm-labs.com]** or use the GitHub Private Vulnerability Reporting feature if enabled on this repository.
+2. **Submit via GitHub Private Vulnerability Reporting:** Send a detailed report using the GitHub Private Vulnerability Reporting.
 3. **What to Include:**
 * A clear description of the vulnerability.
 * A minimal, reproducible `.kr` proof-of-concept (PoC) script.
