@@ -1,4 +1,4 @@
-Write-Host "🐍 Installing Krait Programming Language..." -ForegroundColor Cyan
+Write-Host "Installing Krait Programming Language (v1.0.0)..." -ForegroundColor Cyan
 
 # Setup Directories
 $KraitDir = "$env:USERPROFILE\.krait"
