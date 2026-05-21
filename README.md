@@ -1,4 +1,6 @@
-# Krait
+<div align="center">
+
+<img height="150" alt="Krait" src="https://github.com/user-attachments/assets/2e7b97cc-b082-4762-8b2d-8f0358797417" />
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](#)
 [![Version](https://img.shields.io/badge/version-0.1.0-blue)](#)
@@ -8,7 +10,7 @@ Krait is a fast, minimal, and memory-safe compiled systems programming language.
 
 Designed with the philosophy *"Reduce cognitive noise without reducing power,"* Krait combines the readability and low punctuation density of Python with the raw execution speed of C. It compiles directly to native hardware machine code via an LLVM-IR backend.
 
----
+</div>
 
 ## Features
 
@@ -18,8 +20,6 @@ Designed with the philosophy *"Reduce cognitive noise without reducing power,"* 
 - **Zero-Dependency Interpreter:** Run `.kr` scripts instantly via the built-in tree-walking interpreter without compiling.
 - **Built-in Package Manager:** Scaffold production projects instantly with `krait new`.
 - **VS Code Support:** Official syntax highlighting extension included.
-
----
 
 ## Installation (No Rust Required)
 
@@ -36,8 +36,6 @@ irm https://raw.githubusercontent.com/skiLLM-Labs/Krait/refs/heads/main/install.
 ```
 
 > **Note for Native Compilation:** While the Krait Interpreter runs completely standalone, using the `krait build` command to generate standalone native executables requires `clang` to be installed on your system path.
-
----
 
 ## Getting Started
 
@@ -68,8 +66,6 @@ krait build examples/fibonacci.kr
 ./fibonacci
 ```
 
----
-
 ## Syntax Example
 
 Krait code is designed to be easily scanned by the eyes. Here is a standard recursive Fibonacci sequence:
@@ -89,8 +85,6 @@ show "The result is:"
 show result
 ```
 
----
-
 ## VS Code Extension
 
 To enable official syntax highlighting in VS Code:
@@ -100,8 +94,6 @@ To enable official syntax highlighting in VS Code:
    - **Mac/Linux:** `~/.vscode/extensions/`
 3. Restart VS Code. Your `.kr` files will now be properly colorized!
 
----
-
 ## Architecture & Roadmap
 
 Krait is actively moving through its developmental phases:
@@ -110,14 +102,3 @@ Krait is actively moving through its developmental phases:
 - [x] **Phase 2: Static Engine** (LLVM Text Generation, Native Dynamic Linking, Advanced Type Deduction)
 - [x] **Phase 3: Tooling** (REPL, Project Scaffolding, CLI, VS Code Extension)
 - [ ] **Phase 4: Systems Optimization** (Custom Borrow Checker, Concurrency/Channels, Package Registry)
-
----
-
-## Contributing
-Krait is open-source and built in Rust. To build the compiler from source:
-```bash
-git clone https://github.com/skiLLM-Labs/Krait.git
-cd Krait
-cargo build --release
-cargo install --path .
-```
