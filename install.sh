@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "🐍 Installing Krait Programming Language v0.1.0..."
+echo "Installing Krait Programming Language v1.0.0..."
 
 # Detect OS
 OS="$(uname -s)"
