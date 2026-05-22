@@ -13,8 +13,7 @@
       {
         "id": "krait",
         "aliases": ["Krait", "krait"],
-        "extensions": [".krait"],
-        "configuration": "./language-configuration.json"
+        "extensions": [".krait"]
       }
     ],
     "grammars": [
