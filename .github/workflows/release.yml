@@ -10,20 +10,41 @@ permissions:
 
 jobs:
   build:
-    name: Build for ${{ matrix.os }}
+    name: Build ${{ matrix.target }}
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         include:
+          # --- LINUX COMPATIBILITY (Using musl targets makes them 100% static and distro-agnostic) ---
           - os: ubuntu-latest
+            target: x86_64-unknown-linux-musl
             artifact_name: krait
-            asset_name: krait-linux-amd64
+            asset_name: krait-linux-x64
+          - os: ubuntu-latest
+            target: aarch64-unknown-linux-musl
+            artifact_name: krait
+            asset_name: krait-linux-arm64
+
+          # --- MACOS COMPATIBILITY (Intel and Apple Silicon) ---
           - os: macos-latest
+            target: x86_64-apple-darwin
             artifact_name: krait
-            asset_name: krait-macos-amd64
+            asset_name: krait-macos-x64
+          - os: macos-latest
+            target: aarch64-apple-darwin
+            artifact_name: krait
+            asset_name: krait-macos-arm64
+
+          # --- WINDOWS COMPATIBILITY (Intel/AMD and ARM64) ---
           - os: windows-latest
+            target: x86_64-pc-windows-msvc
             artifact_name: krait.exe
-            asset_name: krait-windows-amd64.exe
+            asset_name: krait-windows-x64.exe
+          - os: windows-latest
+            target: aarch64-pc-windows-msvc
+            artifact_name: krait.exe
+            asset_name: krait-windows-arm64.exe
 
     steps:
       - name: Checkout Code
@@ -31,18 +52,30 @@ jobs:
 
       - name: Install Rust Toolchain
         uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      # Automatically installs cross-compilation linkers for non-native targets (like Windows ARM or Linux ARM)
+      - name: Setup Cross-Compilation Toolchain
+        uses: taiki-e/setup-cross-toolchain-action@v1
+        with:
+          target: ${{ matrix.target }}
 
       - name: Cache Cargo Dependencies
         uses: swatinem/rust-cache@v2
+        with:
+          key: ${{ matrix.target }}
 
+      # Compile explicitly pointing to the target architecture
       - name: Build Krait Binary (Release)
-        run: cargo build --release
+        run: cargo build --release --target ${{ matrix.target }}
 
+      # Handles moving binaries out of the target subdirectories
       - name: Upload Release Binaries
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: target/release/${{ matrix.artifact_name }}
+          file: target/${{ matrix.target }}/release/${{ matrix.artifact_name }}
           asset_name: ${{ matrix.asset_name }}
           tag: ${{ github.ref }}
           overwrite: true
