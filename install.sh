@@ -3,12 +3,28 @@ set -e
 
 echo "Installing Krait Programming Language v1.0.0..."
 
-# Detect OS
+# Detect OS and Architecture
 OS="$(uname -s)"
+ARCH="$(uname -m)"
+
 if [ "$OS" = "Linux" ]; then
-    ASSET_NAME="krait-linux-amd64"
+    if [ "$ARCH" = "x86_64" ]; then
+        ASSET_NAME="krait-linux-x64"
+    elif [[ "$ARCH" == "aarch64" || "$ARCH" == "arm64" ]]; then
+        ASSET_NAME="krait-linux-arm64"
+    else
+        echo "Unsupported Linux architecture: $ARCH"
+        exit 1
+    fi
 elif [ "$OS" = "Darwin" ]; then
-    ASSET_NAME="krait-macos-amd64"
+    if [ "$ARCH" = "x86_64" ]; then
+        ASSET_NAME="krait-macos-x64"
+    elif [ "$ARCH" = "arm64" ]; then
+        ASSET_NAME="krait-macos-apple-silicon"
+    else
+        echo "Unsupported macOS architecture: $ARCH"
+        exit 1
+    fi
 else
     echo "Unsupported OS: $OS"
     exit 1
@@ -44,6 +60,13 @@ if [[ "$SHELL" == *"zsh"* ]]; then
     PROFILE_SCRIPT="$HOME/.zshrc"
 elif [[ "$SHELL" == *"bash"* ]]; then
     PROFILE_SCRIPT="$HOME/.bashrc"
+else
+    # Fallback profile targets if $SHELL env var isn't fully informative
+    if [ -f "$HOME/.zshrc" ]; then
+        PROFILE_SCRIPT="$HOME/.zshrc"
+    elif [ -f "$HOME/.bashrc" ]; then
+        PROFILE_SCRIPT="$HOME/.bashrc"
+    fi
 fi
 
 if [ -n "$PROFILE_SCRIPT" ]; then
@@ -54,5 +77,9 @@ if [ -n "$PROFILE_SCRIPT" ]; then
 fi
 
 echo "✅ Krait installed successfully!"
-echo "Please restart your terminal or run: source $PROFILE_SCRIPT"
+if [ -n "$PROFILE_SCRIPT" ]; then
+    echo "Please restart your terminal or run: source $PROFILE_SCRIPT"
+else
+    echo "Please manually add $BIN_DIR to your system PATH environment variable."
+fi
 echo "Then type 'krait' to start."
