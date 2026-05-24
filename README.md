@@ -40,7 +40,7 @@ Krait links directly to your native system toolchain with optimal compile-time p
 
 3d11909 (Release: v1.0.0)
 
-You do not need Cargo or Rust to run Krait. Install the pre-compiled binary directly to your system:
+You do not need Cargo or Rust to run Krait. Install the pre-compiled binary directly to your system from the Github releases or install via Terminal:
 
 ### Linux & macOS
 ```bash
