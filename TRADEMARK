@@ -36,12 +36,20 @@ and visual designs of the Krait programming project.
    non-exclusive license to use the name "Krait Programming Language" 
    and the official Logo to:
 
-   a. Describe applications or operating system kernels written using 
-      the language (e.g., "An OS kernel written in the Krait 
-      Programming Language").
+   a. Build and Brand Ecosystem Projects: You are fully permitted to 
+      use the name and logo to brand tools, libraries, frameworks, or 
+      applications created specifically *for* or *with* the language, 
+      provided that your project name clearly indicates it is a 
+      third-party tool (e.g., "KraitPackageLinter", "Krait-Web-Framework").
 
-   b. Create educational materials, blogs, video tutorials, or 
-      open-source packages intended to support the ecosystem, provided 
+   b. Describe Project Foundations: You are permitted to use the name 
+      and logo to state that your project, operating system kernel, or 
+      software stack is built using our technology (e.g., "An OS kernel 
+      powered by the Krait Programming Language").
+
+   c. Educational and Community Materials: You may use the name and 
+      logo for creating blogs, books, video tutorials, or open-source 
+      repositories designed to teach or promote the ecosystem, provided 
       the usage is accurate and non-deceptive.
 
 4. PROHIBITED USAGE (THE CONSUMER CONFUSION RULE)
@@ -56,9 +64,9 @@ and visual designs of the Krait programming project.
       thinking it is an official, factory-standard release from 
       KraitDev.
 
-   b. Deceptive Forks and Extensions: If you host a modified fork of the 
-      compiler or launch an independent developer tool, you cannot use 
-      the official logo, and you cannot name your tool "Krait Official," 
-      "Krait Pro," or "Krait Core." The branding must make it crystal 
-      clear to the public that your tool is an unofficial, independent 
-      creation.
+   b. Deceptive Core Forks: If you host a heavily modified fork of the 
+      compiler itself or launch an independent downstream developer tool, 
+      you cannot use the official logo, and you cannot name your tool 
+      "Krait Official," "Krait Pro," or "Krait Core." The branding must 
+      make it crystal clear to the public that your tool is an 
+      independent creation and not the main upstream project.
