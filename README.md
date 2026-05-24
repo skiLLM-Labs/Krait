@@ -2,7 +2,7 @@
 
 <img height="150" alt="Krait" src="https://github.com/user-attachments/assets/2e7b97cc-b082-4762-8b2d-8f0358797417" />
 
-[![Build Status](https://img.shields.io/badge/BUILD-PASSING-fafafa?style=flat-square&color=c20000)](#) [![Version](https://img.shields.io/badge/v1.0.0-3d11909-c20000?style=flat-square&color=c20000)](#) [![License](https://img.shields.io/badge/LICENSE-MIT-c20000?style=flat-square&color=c20000)](#)
+[![Version](https://img.shields.io/badge/v1.0.0-3d11909-c20000?style=flat-square&color=c20000)](#)
 
 Krait is a fast, memory-safe, and highly productive systems programming language.
 
