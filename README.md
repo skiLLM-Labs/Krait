@@ -121,3 +121,13 @@ With the release of **v1.0.0**, Krait's roadmap is fully realized:
 - [x] **Phase 2: Compiler Backend** (LLVM Text IR Generation, Native Linking, Advanced Type Inference)
 - [x] **Phase 3: Ownership & Auto-Drop** (Compile-time Move analysis, Scope-based stack deallocations)
 - [x] **Phase 4: Ecosystem & Tooling** (REPL, Project Manager, Actionable Diagnostics, standard `math`/`io` libraries, `krait fmt`)
+
+## Contributing
+
+See [CONTRIBUTING](CONTRIBUTING.md)
+
+## License
+
+Krait is released under terms of both the MIT license and the Apache 2.0 license.
+
+See [LICENSE-APACHE](LICENSE-APACHE) and [LICENSE-MIT](LICENSE-MIT) for details.
