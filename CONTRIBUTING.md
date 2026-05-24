@@ -4,13 +4,13 @@ First off, thank you for checking out Krait! As a fast, memory-safe systems prog
 
 To maintain strict architectural control over the compiler, type inference engine, and memory ownership model, we follow a specific contribution workflow.
 
-## 🚫 Pull Requests Are Not Accepted
+## Pull Requests Are Not Accepted
 
 > **CRITICAL:** Please do not open Pull Requests (PRs) against this repository.
 
 All direct code contributions, patches, documentation updates, and feature implementations are handled exclusively by the core Krait maintainers. **Any unauthorized Pull Request opened against this repository will be closed automatically without review.**
 
-## 🟢 How to Contribute: Issue-Only Model
+## How to Contribute: Issue-Only Model
 
 We welcome community feedback, bug hunting, and design discussions! If you want to contribute to the evolution of Krait, you can do so entirely through the **GitHub Issues** tab.
 
