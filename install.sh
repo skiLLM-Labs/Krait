@@ -36,8 +36,8 @@ BIN_DIR="$KRAIT_DIR/bin"
 mkdir -p "$BIN_DIR"
 
 # Fetch latest release URL from GitHub API
-echo "Fetching latest release from skiLLM-Labs/Krait..."
-LATEST_URL=$(curl -s https://api.github.com/repos/skiLLM-Labs/Krait/releases/latest \
+echo "Fetching latest release from KraitDev/Krait..."
+LATEST_URL=$(curl -s https://api.github.com/repos/KraitDev/Krait/releases/latest \
     | grep "browser_download_url.*$ASSET_NAME" \
     | cut -d : -f 2,3 \
     | tr -d \")
