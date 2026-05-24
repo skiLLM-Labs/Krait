@@ -44,17 +44,17 @@ You do not need Cargo or Rust to run Krait. Install the pre-compiled binary dire
 
 ### Linux & macOS
 ```bash
-curl -fsSL https://raw.githubusercontent.com/skiLLM-Labs/Krait/refs/heads/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/KraitDev/Krait/refs/heads/main/install.sh | bash
 ```
 
 ### Windows PowerShell
 ```powershell
-irm https://raw.githubusercontent.com/skiLLM-Labs/Krait/refs/heads/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/KraitDev/Krait/refs/heads/main/install.ps1 | iex
 ```
 
 ### Windows Command Prompt
 ```cmd
-curl -sL https://raw.githubusercontent.com/skiLLM-Labs/Krait/main/install.bat | cmd
+curl -sL https://raw.githubusercontent.com/KraitDev/Krait/main/install.bat | cmd
 ```
 
 > **Note for Native Compilation:** While the Krait Interpreter (`krait run`) is completely standalone, using the `krait build` command to generate optimized hardware executables requires `clang` to be installed on your system path.
