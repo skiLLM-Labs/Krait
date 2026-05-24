@@ -19,8 +19,8 @@ If ($Arch -eq "ARM64") {
 }
 
 # Fetch latest release URL from GitHub API
-Write-Host "Fetching latest release from skiLLM-Labs/Krait ($AssetName)..."
-$ApiUrl = "https://api.github.com/repos/skiLLM-Labs/Krait/releases/latest"
+Write-Host "Fetching latest release from KraitDev/Krait ($AssetName)..."
+$ApiUrl = "https://api.github.com/repos/KraitDev/Krait/releases/latest"
 
 try {
     $Release = Invoke-RestMethod -Uri $ApiUrl -Headers @{"User-Agent"="PowerShell-Krait-Installer"}
