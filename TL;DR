@@ -1,10 +1,18 @@
 THE KRAIT PROGRAMMING LANGUAGE TL;DR
 
 * KraitDev owns the official Krait Programming Language project.
+
 * Anyone can use, modify, and share the code for free (open source).
-* If you "fork" (copy) the project to make your own version, you 
-  CANNOT claim you invented it, and you MUST change the name so it 
+
+* If you "fork" (copy) the compiler itself to make your own version, 
+  you CANNOT claim you invented it, and you MUST change the name so it 
   does not use "Krait Programming Language" or the official logo.
+
+* You CAN use the "Krait Programming Language" name and official logo 
+  to build, brand, and promote tools, packages, or libraries created 
+  for the Krait ecosystem, as long as it is clear your tool is an 
+  independent community creation.
+
 * The word "krait" can be used completely freely by anyone for 
   anything else outside of software development (like for games, 
   snakes, clothes, or stories).
