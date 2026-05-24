@@ -1,0 +1,62 @@
+KRAIT PROGRAMMING LANGUAGE COPYRIGHT AND CONTRIBUTION AGREEMENT
+
+Copyright (c) 2026 KraitDev and Contributors
+
+This Agreement establishes the legal framework for ownership, copyright, 
+and contribution management for the Krait Programming Language core 
+architecture, compiler toolchain, standard library, and runtime 
+components (collectively referred to as "The Project").
+
+1. OWNERSHIP OF THE PROJECT
+
+   The Project, including its primary source code, documentation, 
+   architecture designs, and official repositories, is legally owned 
+   and managed exclusively by KraitDev ("The Project Owner"). 
+
+2. LICENSING TO THE PUBLIC
+
+   The Project Owner distributes the official releases of the Krait 
+   compiler and toolchain under open-source terms via a dual MIT and 
+   Apache License 2.0 framework. This grants the global developer 
+   community a generous, worldwide, royalty-free right to use, execute, 
+   modify, and redistribute the software for personal, educational, or 
+   commercial applications, subject to preserving the original 
+   copyright notices.
+
+3. CONTRIBUTOR ACCESS AND RIGHTS
+
+   Any individual, group, or entity that submits code, documentation, 
+   fixes, or pull requests to the official repositories is defined as 
+   a "Contributor."
+
+   a. Inbound License Grant: By submitting a contribution, the 
+      Contributor retains the underlying moral authorship of their 
+      specific lines of code but automatically grants KraitDev a 
+      perpetual, irrevocable, worldwide, royalty-free, non-exclusive 
+      license to use, sub-license, host, modify, and distribute that 
+      contribution as a permanent part of the core Project.
+
+   b. Level of Access: Contributors are granted permission to 
+      participate in public development, test the software, and 
+      maintain personal working copies. However, contributor status 
+      does not grant ownership shares, governance votes, or veto power 
+      over the Project's architectural direction, which remains 
+      solely with KraitDev.
+
+4. RESTRICTIONS ON FORKING AND PLAGIARISM
+
+   While open-source licenses permit users to "fork" (clone) the 
+   source code repository for independent modification, the following 
+   strict boundaries apply to all Contributors and downstream users:
+
+   a. No False Claims of Original Ownership: If you fork the 
+      repository, you are strictly prohibited from stripping out the 
+      original copyright headers or implying that you built the core 
+      compiler engine from scratch. You cannot claim "I own this 
+      technology." 
+
+   b. Mandatory Rebranding: If you modify the core code to distribute 
+      a separate variant or competitive toolchain, you must prominently 
+      add change notices to the files and you must completely strip 
+      out the "Krait" identity. You cannot present your fork as an 
+      official branch or alternative version of the Krait compiler.
