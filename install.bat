@@ -23,10 +23,10 @@ if "%PROCESSOR_ARCHITECTURE%"=="ARM64" (
     exit /b 1
 )
 
-echo Fetching latest release from skiLLM-Labs/Krait (%ASSET_NAME%)...
+echo Fetching latest release from KraitDev/Krait (%ASSET_NAME%)...
 
 :: Use PowerShell under the hood to securely grab the download URL from the GitHub API
-set "API_URL=https://api.github.com/repos/skiLLM-Labs/Krait/releases/latest"
+set "API_URL=https://api.github.com/repos/KraitDev/Krait/releases/latest"
 for /f "delims=" %%I in ('powershell -NoProfile -Command ^
     "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; ^
      try { ^
