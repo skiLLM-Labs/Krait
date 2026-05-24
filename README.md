@@ -107,8 +107,8 @@ show p
 ## VS Code Extension
 
 To enable official syntax highlighting in VS Code:
-1. Open the `vscode-krait` directory.
-2. Copy the folder to your VS Code extensions directory:
+1. Download the `vscode-krait.zip` file from the repo and extract it.
+2. Copy the extracted `vscode-krait` folder to your VS Code extensions directory:
    - **Windows:** `%USERPROFILE%\.vscode\extensions\`
    - **Mac/Linux:** `~/.vscode/extensions/`
 3. Restart VS Code. Your `.kr` files will now be properly colorized!
