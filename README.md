@@ -126,8 +126,13 @@ With the release of **v1.0.0**, Krait's roadmap is fully realized:
 
 See [CONTRIBUTING](CONTRIBUTING.md)
 
-## License
+## License & Project Policies
 
-Krait is released under terms of both the MIT license and the Apache 2.0 license.
+Krait is an open-source project managed by **KraitDev**. The core compiler, standard libraries, and runtime are dual-licensed under the terms of both the **MIT License** and the **Apache License 2.0**.
 
-See [LICENSE-APACHE](LICENSE-APACHE) and [LICENSE-MIT](LICENSE-MIT) for details.
+To protect the integrity of the ecosystem and ensure fair attribution, all users, forks, and contributors are bound by our official project policies:
+
+* **Copyright & Ownership:** KraitDev retains exclusive ownership of the core Krait codebase. Contributors maintain authorship of their specific code but grant KraitDev a permanent license to distribute it. Review the full fork and attribution boundaries in [COPYRIGHT](COPYRIGHT).
+* **Trademark & Identity:** The phrase *"Krait Programming Language"* and the official logos are protected brand assets. You are fully permitted to use them to brand community tools, libraries, and extensions built for the ecosystem, provided it is clear they are independent creations. Deceptive core forks or commercial passing off are strictly prohibited. Review the full domain boundaries in [TRADEMARK](TRADEMARK).
+
+See [LICENSE-MIT](LICENSE-MIT) and [LICENSE-APACHE](LICENSE-APACHE) for the underlying open-source license texts.
