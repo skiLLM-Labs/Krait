@@ -124,7 +124,9 @@ With the release of **v1.0.0**, Krait's roadmap is fully realized:
 
 ## Contributing
 
-See [CONTRIBUTING](CONTRIBUTING.md)
+We welcome contributions only through issues.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) to learn more.
 
 ## License & Project Policies
 
