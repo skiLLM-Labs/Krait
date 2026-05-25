@@ -3,18 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test</title>
+<meta
+  http-equiv="Content-Security-Policy"
+  content="
+    default-src 'self';
+    script-src 'self';
+    style-src 'self';
+    font-src 'self';
+    connect-src 'self';
+    img-src 'self';
+    object-src 'none';
+    base-uri 'none';
+    frame-ancestors 'none';
+    form-action 'none';
+    require-trusted-types-for 'script';
+    upgrade-insecure-requests;
+  ">
+  <title>GetKrait</title>
 </head>
 <body>
-  <h1>Krait</h1>
-  <p>Official installer endpoint for Krait.</p>
+  <h1>Get Krait</h1>
+  <p>https://getkrait.pages.dev is the official endpoint for the Krait Programming Langauge Installer scripts.<br>
+  Do not download Krait from anywhere else. Either Download by pasting the commands in your Terminal or download the binaries from the official <a href="https://github.com/KraitDev/Krait">Krait Github repo</a>releaes or download from the official krait website <a herf="https://kraitlang.pages.dev">https://kraitlang.pages.dev</a>.<br><br>
+  You may download the installation script if you want or you can check the source in the official Github repo</p>
 
-  <h2>Install</h2>
-
-  <pre><code>curl -fsSL https://kraitlang.pages.dev/install.sh | bash</code></pre>
+  <h2>Download</h2>
 
   <p>
-    <a href="/install.sh">View install.sh</a>
+    <a href="/install.sh">Download install.sh</a>
+    <a href="/install.ps1">Download install.ps1</a>
+    <a href="/install.bat">Download install.bat</a>
   </p>
 </body>
 </html>
