@@ -12,7 +12,7 @@ pub enum Value {
 
 pub struct Interpreter {
     functions: HashMap<String, (Vec<String>, Vec<Stmt>)>,
-    pub env: HashMap<String, Value>, // Persisted global state for REPL
+    pub env: HashMap<String, Value>, 
 }
 
 impl Interpreter {
@@ -24,7 +24,7 @@ impl Interpreter {
     }
 
     pub fn interpret(&mut self, program: &[Stmt]) -> Result<Option<Value>, String> {
-        // Register top-level function declarations globally
+        
         for stmt in program {
             if let Stmt::FunctionDef { name, params, body } = stmt {
                 self.functions.insert(name.clone(), (params.clone(), body.clone()));
@@ -33,11 +33,11 @@ impl Interpreter {
 
         let mut last_val = None;
         
-        // Execute sequentially
+        
         for stmt in program {
             if !matches!(stmt, Stmt::FunctionDef { .. } | Stmt::StructDef { .. }) {
-                // We pass a clone of the global environment for local modifications
-                // but VariableDecl statements will explicitly update self.env.
+                
+                
                 let mut local_env = self.env.clone();
                 last_val = self.execute_stmt(stmt, &mut local_env)?;
             }
@@ -52,7 +52,7 @@ impl Interpreter {
             Stmt::VariableDecl { name, value } => {
                 let val = self.eval_expr(value, env)?;
                 env.insert(name.clone(), val.clone());
-                self.env.insert(name.clone(), val); // Persist to global REPL memory
+                self.env.insert(name.clone(), val); 
                 Ok(None)
             }
             Stmt::FieldAssignment { .. } => {
@@ -127,7 +127,7 @@ impl Interpreter {
             }
             Stmt::Expr(expr) => {
                 let val = self.eval_expr(expr, env)?;
-                Ok(Some(val)) // Return the value (useful for printing in REPL)
+                Ok(Some(val)) 
             }
         }
     }
@@ -141,7 +141,7 @@ impl Interpreter {
                 Literal::Bool(v) => Ok(Value::Bool(*v)),
             },
             Expr::Variable(name) => {
-                // Check local scope first, then global REPL scope
+                
                 if let Some(val) = env.get(name).or_else(|| self.env.get(name)) {
                     Ok(val.clone())
                 } else {

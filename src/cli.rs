@@ -6,7 +6,7 @@ use crate::parser::Parser;
 use crate::sema::SemanticAnalyzer;
 
 pub fn execute_subcommand(args: &[String]) {
-    // If no arguments are passed, open the interactive REPL (IDLE)
+    
     if args.is_empty() {
         start_repl();
         return;
@@ -66,9 +66,9 @@ pub fn execute_subcommand(args: &[String]) {
     }
 }
 
-// ---------------------------------------------------------
-// Phase 3: The Interactive REPL (IDLE)
-// ---------------------------------------------------------
+
+
+
 fn start_repl() {
     println!("Krait 1.0.0 Interactive Shell");
     println!("Type 'exit' to quit.\n");
@@ -82,7 +82,7 @@ fn start_repl() {
         
         let mut input = String::new();
         io::stdin().read_line(&mut input).unwrap();
-        let input = input.trim_end().to_string() + "\n"; // Ensure newline for the parser
+        let input = input.trim_end().to_string() + "\n"; 
         
         if input.trim() == "exit" { break; }
         if input.trim().is_empty() { continue; }
@@ -92,16 +92,16 @@ fn start_repl() {
                 let mut parser = Parser::new(tokens);
                 match parser.parse_program() {
                     Ok(ast) => {
-                        let _ = sema.analyze(&ast); // Ignore type errors in REPL to be flexible
+                        let _ = sema.analyze(&ast); 
                         match interpreter.interpret(&ast) {
-                            Ok(Some(val)) => match val { // Only print values that aren't Void
+                            Ok(Some(val)) => match val { 
                                 crate::interpreter::Value::Void => {},
                                 crate::interpreter::Value::Int(v) => println!("{}", v),
                                 crate::interpreter::Value::Float(v) => println!("{}", v),
                                 crate::interpreter::Value::Str(v) => println!("\"{}\"", v),
                                 crate::interpreter::Value::Bool(v) => println!("{}", v),
                             },
-                            Ok(None) => {}, // Standard statements yield nothing visually
+                            Ok(None) => {}, 
                             Err(e) => eprintln!("Runtime Error: {}", e),
                         }
                     }
@@ -113,9 +113,9 @@ fn start_repl() {
     }
 }
 
-// ---------------------------------------------------------
-// Phase 3: Package System Scaffolding (`krait new`)
-// ---------------------------------------------------------
+
+
+
 fn create_project(name: &str) {
     if fs::create_dir(name).is_err() {
         eprintln!("Error: Directory '{}' already exists.", name);
@@ -137,9 +137,9 @@ fn create_project(name: &str) {
     println!("  krait run src/main.kr");
 }
 
-// ---------------------------------------------------------
-// Standard Commands
-// ---------------------------------------------------------
+
+
+
 fn print_help() {
     println!("Krait Language Compiler Interface");
     println!("Usage:");

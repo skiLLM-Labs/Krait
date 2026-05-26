@@ -32,7 +32,7 @@ impl LLVMGenerator {
         format!("%t{}", self.temp_counter)
     }
 
-    // Resolves parameter registers to stack pointers if they are in local scope
+    
     fn resolve_var_ptr(&self, name: &str) -> String {
         if self.active_params.contains(&name.to_string()) {
             format!("{}.addr", name)

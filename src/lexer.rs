@@ -27,7 +27,7 @@ impl Lexer {
                 continue;
             }
 
-            // Indentation counting
+            
             let mut indent_spaces = 0;
             for c in line.chars() {
                 if c == ' ' {
@@ -62,7 +62,7 @@ impl Lexer {
                 }
             }
 
-            // Character tokenization
+            
             let mut chars = trimmed[indent_spaces..].chars().peekable();
             while let Some(&c) = chars.peek() {
                 match c {

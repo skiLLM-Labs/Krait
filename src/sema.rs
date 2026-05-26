@@ -16,7 +16,7 @@ pub struct SemanticAnalyzer {
     scopes: Vec<HashMap<String, VarState>>,
     function_signatures: HashMap<String, Type>,
     struct_definitions: HashMap<String, HashMap<String, Type>>,
-    pub auto_drops: HashMap<usize, Vec<String>>, // Maps Scope depth to variables that need dropping
+    pub auto_drops: HashMap<usize, Vec<String>>, 
 }
 
 impl SemanticAnalyzer {
@@ -47,7 +47,7 @@ impl SemanticAnalyzer {
             if let Some(state) = scope.get(name) {
                 match state {
                     VarState::Valid(ty) => return Some(ty.clone()),
-                    VarState::Moved(_) => return None, // Or we could handle error properly elsewhere
+                    VarState::Moved(_) => return None, 
                 }
             }
         }
