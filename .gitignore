@@ -36,7 +36,3 @@
 # OS generated files
 .DS_Store
 Thumbs.db
-
-# Agent & workspace temporary metadata
-.antigravitycli/
-.gemini/
