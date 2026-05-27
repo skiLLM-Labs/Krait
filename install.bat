@@ -26,10 +26,10 @@ if "%PROCESSOR_ARCHITECTURE%"=="ARM64" (
 echo Fetching latest release from KraitDev/Krait (%ASSET_NAME%)...
 
 :: Use PowerShell under the hood to securely grab the download URL from the GitHub API
+:: FIXED: Removed the hard-coded [Net.ServicePointManager]::SecurityProtocol line so it automatically uses the best TLS version
 set "API_URL=https://api.github.com/repos/KraitDev/Krait/releases/latest"
 for /f "delims=" %%I in ('powershell -NoProfile -Command ^
-    "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; ^
-     try { ^
+    "try { ^
          $Release = Invoke-RestMethod -Uri '%API_URL%' -Headers @{'User-Agent'='CMD-Krait-Installer'}; ^
          $Url = ($Release.assets | Where-Object { $_.name -eq '%ASSET_NAME%' }).browser_download_url; ^
          if ($Url) { Write-Output $Url } ^
