@@ -1,9 +1,6 @@
 # Rust build directory
 /target/
 
-# Cargo lock files (optional, but standard to ignore in libraries, let's keep it tracked or ignored as needed)
-# Since Cargo.lock is in the root, we'll keep it tracked, but ignore standard cargo output.
-
 # Compiled native binaries (executables with no extensions)
 /calculator
 /ffi
