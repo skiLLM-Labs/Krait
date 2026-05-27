@@ -25,3 +25,15 @@ This major release marks the transition of Krait into a production-ready systems
   - Configured compiler to pass `-O3` (Maximum optimization), `-flto` (Link-Time Optimization), and `-march=x86-64-v2` hardware instruction optimizations to Clang/LLVM.
 - **Interpreter block scoping**:
   - Patched the tree-walking interpreter to correctly propagate variable changes back to outer scopes while keeping block-local variables isolated.
+
+# Krait v0.1.0
+
+v0.1.0 was the initial prototype version of krait and was not released on Github as binaries for the general public to download.
+
+### Added
+- Standard Python-like lexer and parser.
+- Primitive types (Int, Float, Str, Bool, Void) and basic structures.
+- Standalone tree-walking interpreter.
+- Standalone REPL shell.
+- Package scaffolding system (`krait new`).
+- Core LLVM-IR generation code.
